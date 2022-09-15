@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -30,13 +31,15 @@ public class Classroom extends BaseEntity {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "姓名")
+    @NotBlank(message = "学生名称不能为空")
+    @ApiModelProperty(value = "姓名",required = true)
     private String usernames;
 
-    @ApiModelProperty(value = "价格")
+    @NotBlank(message = "学生名称不能为空")
+    @ApiModelProperty(value = "价格",required = true)
     private String price;
-
-    @ApiModelProperty(value = "宿舍")
+    @NotBlank(message = "学生名称不能为空")
+    @ApiModelProperty(value = "宿舍",required = true)
     private String context;
 
 
