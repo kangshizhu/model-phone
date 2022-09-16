@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import modules.util.CommonConstant;
 import modules.util.JwtUtil;
 import modules.util.RedisUtil;
+import modules.util.SpringContextUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -28,9 +29,7 @@ import java.util.Set;
 @Slf4j
 @Component
 public class ShiroRealm extends AuthorizingRealm {
-//    @Lazy
-//    @Resource
-//    private CommonAPI commonAPI;
+
 
 
     @Lazy
@@ -85,14 +84,14 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
+
+        log.debug("===============Shiro身份认证开始============doGetAuthenticationInfo==========");
         String token = (String) auth.getCredentials();
-//        log.debug("===============Shiro身份认证开始============doGetAuthenticationInfo==========");
-//        String token = (String) auth.getCredentials();
-//        if (token == null) {
-//            log.info("————————身份认证失败——————————IP地址:  "+ oConvertUtils.getIpAddrByRequest(SpringContextUtils.getHttpServletRequest()));
-//            throw new AuthenticationException("token为空!");
-//        }
-//        // 校验token有效性
+        if (token == null) {
+            log.info("————————身份认证失败——————————IP地址:  "+ oConvertUtils.getIpAddrByRequest(SpringContextUtils.getHttpServletRequest()));
+            throw new AuthenticationException("token为空!");
+        }
+        // 校验token有效性
         LoginUser loginUser = this.checkUserTokenIsEffect(token);
         //这点返回的是doGetAuthorizationInfo读取到的信息
         return new SimpleAuthenticationInfo(token, token, getName());
@@ -114,7 +113,6 @@ public class ShiroRealm extends AuthorizingRealm {
         // 查询用户信息
         log.debug("———校验token是否有效————checkUserTokenIsEffect——————— "+ token);
         LoginUser loginUser = new LoginUser();
-          //commonAPI.getUserByName(username);
 //        if (loginUser == null) {
 //            throw new AuthenticationException("用户不存在!");
 //        }
@@ -146,10 +144,10 @@ public class ShiroRealm extends AuthorizingRealm {
         if (oConvertUtils.isNotEmpty(cacheToken)) {
             // 校验token有效性
             if (!JwtUtil.verify(token)) {
-                //String newAuthorization = JwtUtil.token(userName, passWord);
-                // 设置超时时间
-                //redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, redisUtil.get(CommonConstant.PREFIX_USER_TOKEN + token));
-                //redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, newAuthorization);
+                String newAuthorization = JwtUtil.token(userName, passWord);
+                 //设置超时时间
+                redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, redisUtil.get(CommonConstant.PREFIX_USER_TOKEN + token));
+                redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, newAuthorization);
                 //两天toekn过期时间1728000
                 redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_DATE);
                 log.info("——————————用户在线操作，更新token保证不掉线—————————jwtTokenRefresh——————— "+ token);

@@ -6,8 +6,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.google.common.base.Joiner;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +53,38 @@ public class JwtUtil {
         }
         return token;
     }
+
+    /**
+     * 生成签名,5min后过期
+     *
+     * @param username 用户名
+     * @param secret   用户的密码
+     * @return 加密的token
+     */
+    public static String sign(String username, String secret) {
+        Date date = new Date(System.currentTimeMillis() + EXPIRE_DATE);
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+        // 附带username信息
+        return JWT.create().withClaim("username", username).withExpiresAt(date).sign(algorithm);
+
+    }
+
+    /**
+     * 根据request中的token获取用户账号
+     *
+     * @param request
+     * @return
+     * @throws
+     */
+    public static String getUserNameByToken(HttpServletRequest request) throws Exception {
+        String accessToken = request.getHeader("X-Access-Token");
+        String username = getUsername(accessToken);
+        if (oConvertUtils.isEmpty(username)) {
+            throw new Exception("未获取到用户");
+        }
+        return username;
+    }
+
     /**
      * 获得token中的信息无需secret解密也能获得
      *

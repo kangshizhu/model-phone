@@ -14,10 +14,10 @@ import java.util.Date;
 public class BaseEntity {
 
     /**创建人*/
-    private String createBy;
+    private Long createBy;
 
     /**修改人*/
-    private String updateBy;
+    private Long updateBy;
 
     /**创建时间*/
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
@@ -30,6 +30,5 @@ public class BaseEntity {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-//    /**删除标识*/
-//    private Integer delFlag;
+
 }

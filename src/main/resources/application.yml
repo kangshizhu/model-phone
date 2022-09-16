@@ -5,12 +5,11 @@ server:
 
 
 spring:
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.106.147:3306/mytest?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://47.108.180.229:3306/mytest?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: Kang!635945671
+    password: root1234
 
 
 
@@ -43,7 +42,7 @@ jeecg:
 
 spring.redis:
   database: 0
-  host: 192.168.106.147
+  host: 47.108.180.229
   lettuce:
     pool:
       max-active: 8   #最大连接数据库连接数,设 0 为没有限制

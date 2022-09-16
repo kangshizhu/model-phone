@@ -64,24 +64,24 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        if (oConvertUtils.isNotEmpty(excludeUrls)) {
+        if(oConvertUtils.isNotEmpty(excludeUrls)){
             String[] permissionUrl = excludeUrls.split(",");
-            for (String url : permissionUrl) {
-                filterChainDefinitionMap.put(url, "anon");
+            for(String url : permissionUrl){
+                filterChainDefinitionMap.put(url,"anon");
             }
         }
+        System.out.println("xxxxxxxxxxxxxx");
         // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/class/login", "anon"); //轮播图查询接口排除
-        filterChainDefinitionMap.put("/class/hello", "anon");
+        //filterChainDefinitionMap.put("/users/queryUser", "anon"); //登录接口排除
+
         // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<String, Filter>(1);
         //如果cloudServer为空 则说明是单体 需要加载跨域配置
         Object cloudServer = env.getProperty(CommonConstant.CLOUD_SERVER_KEY);
-        //进行JwtFilter 工具类验证
         filterMap.put("jwt", new JwtFilter(cloudServer==null));
         shiroFilterFactoryBean.setFilters(filterMap);
         // <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边
-//        filterChainDefinitionMap.put("/**", "jwt");
+        filterChainDefinitionMap.put("/**", "jwt");
         // 未授权界面返回JSON
         shiroFilterFactoryBean.setUnauthorizedUrl("/sys/common/403");
         shiroFilterFactoryBean.setLoginUrl("/sys/common/403");

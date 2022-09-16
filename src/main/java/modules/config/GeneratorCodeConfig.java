@@ -44,10 +44,10 @@ public class GeneratorCodeConfig {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.106.147:3306/mytest?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai");
+        dsc.setUrl("jdbc:mysql://47.108.180.229:3306/mytest?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("Kang!635945671");
+        dsc.setPassword("root1234");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -120,7 +120,7 @@ public class GeneratorCodeConfig {
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         //scanner("表名，多个英文逗号分割").split(",")
-        strategy.setInclude("prize");
+        strategy.setInclude("users");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
