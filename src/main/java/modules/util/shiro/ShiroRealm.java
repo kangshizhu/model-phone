@@ -91,8 +91,7 @@ public class ShiroRealm extends AuthorizingRealm {
             log.info("————————身份认证失败——————————IP地址:  "+ oConvertUtils.getIpAddrByRequest(SpringContextUtils.getHttpServletRequest()));
             throw new AuthenticationException("token为空!");
         }
-        // 校验token有效性
-        LoginUser loginUser = this.checkUserTokenIsEffect(token);
+         this.checkUserTokenIsEffect(token);
         //这点返回的是doGetAuthorizationInfo读取到的信息
         return new SimpleAuthenticationInfo(token, token, getName());
      //   return  true;
@@ -147,7 +146,7 @@ public class ShiroRealm extends AuthorizingRealm {
                 String newAuthorization = JwtUtil.token(userName, passWord);
                  //设置超时时间
                 redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, redisUtil.get(CommonConstant.PREFIX_USER_TOKEN + token));
-                redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, newAuthorization);
+//                redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, newAuthorization);
                 //两天toekn过期时间1728000
                 redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_DATE);
                 log.info("——————————用户在线操作，更新token保证不掉线—————————jwtTokenRefresh——————— "+ token);

@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import modules.entity.BaseEntity;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 /**

@@ -70,9 +70,9 @@ public class ShiroConfig {
                 filterChainDefinitionMap.put(url,"anon");
             }
         }
-        System.out.println("xxxxxxxxxxxxxx");
+
         // 配置不会被拦截的链接 顺序判断
-        //filterChainDefinitionMap.put("/users/queryUser", "anon"); //登录接口排除
+        filterChainDefinitionMap.put("/users/queryUser", "anon"); //登录接口排除
 
         // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<String, Filter>(1);

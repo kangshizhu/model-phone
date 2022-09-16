@@ -38,6 +38,7 @@ public class ClassroomDto extends BaseEntity  {
     @NotBlank(message = "学生名称不能为空")
     @ApiModelProperty(value = "价格",required = true)
     private String price;
+
     @NotBlank(message = "学生名称不能为空")
     @ApiModelProperty(value = "宿舍",required = true)
     private String context;

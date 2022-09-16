@@ -24,7 +24,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value="Classroom对象", description="")
+@ApiModel(value="Classroom对象", description="班级表")
 @TableName("classroom")
 public class Classroom extends BaseEntity {
 

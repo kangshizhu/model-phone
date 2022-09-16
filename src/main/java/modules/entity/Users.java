@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value="Users对象", description="")
+@ApiModel(value="Users对象", description="用户表")
 @TableName("users")
 public class Users extends BaseEntity {
 

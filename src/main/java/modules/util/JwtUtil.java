@@ -121,7 +121,7 @@ public class JwtUtil {
         try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
-            DecodedJWT jwt = verifier.verify(token);
+            //DecodedJWT jwt = verifier.verify(token);
             return true;
         }catch (Exception e){
             e.printStackTrace();
