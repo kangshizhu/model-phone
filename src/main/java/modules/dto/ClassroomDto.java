@@ -31,11 +31,11 @@ public class ClassroomDto extends BaseEntity  {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @NotBlank(message = "学生名称不能为空")
+    @NotBlank(message = "姓名不能为空")
     @ApiModelProperty(value = "姓名",required = true)
     private String usernames;
 
-    @NotBlank(message = "学生名称不能为空")
+    @NotBlank(message = "价格不能为空")
     @ApiModelProperty(value = "价格",required = true)
     private String price;
 

@@ -34,7 +34,7 @@ public class GeneratorCodeConfig {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("astupidcoder");
+        gc.setAuthor("kangshizhu");
         gc.setOpen(false);
         //实体属性 Swagger2 注解
         gc.setSwagger2(true);
@@ -120,7 +120,7 @@ public class GeneratorCodeConfig {
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         //scanner("表名，多个英文逗号分割").split(",")
-        strategy.setInclude("users");
+        strategy.setInclude("test");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

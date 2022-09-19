@@ -17,14 +17,14 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author astupidcoder
- * @since 2022-09-16
+ * @since 2022-09-17
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value="Users对象", description="用户表")
-@TableName("users")
-public class Users extends BaseEntity {
+@ApiModel(value="Navigation对象", description="导航栏")
+@TableName("navigation")
+public class Navigation extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,17 +32,11 @@ public class Users extends BaseEntity {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "账号")
-    private String username;
+    @ApiModelProperty(value = "导航栏名称")
+    private String labelName;
 
-    @ApiModelProperty(value = "密码")
-    private String password;
-
-    @ApiModelProperty(value = "电话号码")
-    private String phone;
-
-    @ApiModelProperty(value = "用户类型(1:普通用户,2:达人,3:机构,4:品牌商家)")
-    private Integer type;
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
 
 
 }

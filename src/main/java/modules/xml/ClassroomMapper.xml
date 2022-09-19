@@ -3,7 +3,7 @@
 <mapper namespace="modules.mapper.ClassroomMapper">
 
     <select id="selectPageVo" resultType="modules.entity.Classroom">
-        select  * from  classroom where  del_flag=1
+        select  * from  classroom
     </select>
 
 </mapper>

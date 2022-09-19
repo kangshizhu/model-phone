@@ -38,5 +38,8 @@ public class UsersDto extends BaseEntity {
     @ApiModelProperty(value = "电话号码")
     private String phone;
 
+    @ApiModelProperty(value = "用户类型(1:普通用户,2:达人,3:机构,4:品牌商家)")
+    private Integer type;
+
 
 }

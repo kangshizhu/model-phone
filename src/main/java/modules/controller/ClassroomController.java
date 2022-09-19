@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -30,19 +31,18 @@ import java.util.List;
 @Api(tags = "用户接口")
 @Log4j2
 @RestController
-@RequestMapping("/Classroom")
+@RequestMapping("/classroom")
 
 public class ClassroomController {
 
     @Resource
     ClassroomMapper classroomMapper;
 
-    @ApiOperation(value = "获取用户", notes = "根据id查询用户信息")
+    @ApiOperation(value = "获取用户", notes = "查询用户信息")
     @PostMapping(value = "/queryUser")
     @ResponseBody
-    public Result queryRuleUser(@RequestBody ClassroomDto classroomDto) {
+    public Result queryRuleUser(@RequestBody @Valid ClassroomDto classroomDto) {
         Classroom classroom=new Classroom();
-        classroom.setUsernames("111");
         classroomMapper.insert(classroom);
         Page<Classroom> page=new Page<>(1,10);
         QueryWrapper<Classroom> QueryWrapper=new QueryWrapper<>();
@@ -50,10 +50,10 @@ public class ClassroomController {
         return Result.OK(classroomList);
     }
 
-    @ApiOperation(value = "获取用户", notes = "根据id查询用户信息")
-    @PostMapping(value = "/update")
+    @ApiOperation(value = "获取用户", notes = "查询用户信息")
+    @PostMapping(value = "/select")
     @ResponseBody
-    public Result update() {
+    public Result select() {
         Classroom classroom=new Classroom();
         classroom.setUsernames("111");
         classroomMapper.insert(classroom);
@@ -62,12 +62,24 @@ public class ClassroomController {
         return Result.OK(classroomList);
     }
 
-    @ApiOperation(value = "获取用户", notes = "根据id查询用户信息")
-    @PostMapping(value = "/select")
+    @ApiOperation(value = "获取用户", notes = "查询用户信息")
+    @PostMapping(value = "/update")
     @ResponseBody
-    public Result select(@RequestBody ClassroomDto classroomDto) {
-        Classroom classroom=classroomMapper.selectById(28);
+    public Result update() {
+        Classroom classroom=new Classroom();
+        classroom.setId(1);
+        classroom.setUsernames("asas");
+        classroomMapper.updateById(classroom);
+        return Result.OK("修改");
+    }
 
+
+    @ApiOperation(value = "获取用户", notes = "根据id查询用户信息")
+    @PostMapping(value = "/selectById")
+    @ResponseBody
+    public Result selectById(@RequestBody @Valid ClassroomDto classroomDto) {
+        Classroom classroom=classroomMapper.selectById(28);
         return Result.OK(classroom);
     }
+
 }

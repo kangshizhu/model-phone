@@ -28,7 +28,7 @@ import java.util.Set;
 // 自定义的 ShiroRealm
 @Slf4j
 @Component
-public class ShiroRealm extends AuthorizingRealm {
+public class ShiroRealm extends AuthorizingRealm  {
 
 
 
@@ -87,6 +87,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
         log.debug("===============Shiro身份认证开始============doGetAuthenticationInfo==========");
         String token = (String) auth.getCredentials();
+        System.out.println(token+"qqqqqqqqqqqqq");
         if (token == null) {
             log.info("————————身份认证失败——————————IP地址:  "+ oConvertUtils.getIpAddrByRequest(SpringContextUtils.getHttpServletRequest()));
             throw new AuthenticationException("token为空!");
@@ -104,9 +105,9 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     public LoginUser checkUserTokenIsEffect(String token) throws AuthenticationException {
         // 从redis解密获得username，用于和数据库进行对比
-        String username = JwtUtil.getUsername(token);
-        String password = JwtUtil.getPassword(token);
-        if (username == null) {
+        String phone = JwtUtil.getUserPhone(token);
+        Long userId = JwtUtil.getUserId(token);
+        if (phone == null) {
             throw new AuthenticationException("token非法无效!");
         }
         // 查询用户信息
@@ -120,7 +121,7 @@ public class ShiroRealm extends AuthorizingRealm {
 //            throw new AuthenticationException("账号已被锁定,请联系管理员!");
 //        }
         // 校验token是否超时失效 & 或者账号密码是否错误
-        if (!jwtTokenRefresh(token, username, password)) {
+        if (!jwtTokenRefresh(token, phone, userId)) {
             throw new AuthenticationException("Token失效，请重新登录!");
         }
         return loginUser;
@@ -134,16 +135,16 @@ public class ShiroRealm extends AuthorizingRealm {
      * 注意： 前端请求Header中设置Authorization保持不变，校验有效性以缓存中的token为准。
      *       用户过期时间 = Jwt有效时间 * 2。
      *
-     * @param userName
-     * @param passWord
+     * @param phone
+     * @param userId
      * @return
      */
-    public boolean jwtTokenRefresh(String token, String userName, String passWord) {
+    public boolean jwtTokenRefresh(String token, String phone, Long userId) {
         String cacheToken = String.valueOf(redisUtil.get(CommonConstant.PREFIX_USER_TOKEN + token));
         if (oConvertUtils.isNotEmpty(cacheToken)) {
             // 校验token有效性
             if (!JwtUtil.verify(token)) {
-                String newAuthorization = JwtUtil.token(userName, passWord);
+                String newAuthorization = JwtUtil.token(phone, userId);
                  //设置超时时间
                 redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, redisUtil.get(CommonConstant.PREFIX_USER_TOKEN + token));
 //                redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, newAuthorization);

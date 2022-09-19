@@ -20,14 +20,14 @@ import java.util.Map;
  **/
 public class JwtUtil {
     //设置过期时间
-    //Token过期时间两天
+    //Token过期时间两天 jwt过期时间
     public static final long EXPIRE_DATE = 30 * 60 * 1000 * 96;
 
     // private static final long EXPIRE_DATE=30 * 60 * 1000 * 96;
     //token秘钥
     private static final String TOKEN_SECRET = "ZCfasfhuaUUHufguGuwu2020BQWE";
 
-    public static String token (String username,String password){
+    public static String token (String phone, Long userId){
 
         String token = "";
         try {
@@ -44,8 +44,8 @@ public class JwtUtil {
             //携带username，password信息，生成签名
             token = JWT.create()
                     .withHeader(header)
-                    .withClaim("username",username)
-                    .withClaim("password",password).withExpiresAt(date)
+                    .withClaim("phone",phone)
+                    .withClaim("userId",userId)
                     .sign(algorithm);
         }catch (Exception e){
             e.printStackTrace();
@@ -57,15 +57,15 @@ public class JwtUtil {
     /**
      * 生成签名,5min后过期
      *
-     * @param username 用户名
-     * @param secret   用户的密码
+     * @param phone 用户手机
+     * @param userId 用户id
      * @return 加密的token
      */
-    public static String sign(String username, String secret) {
+    public static String sign(String phone, Long userId) {
         Date date = new Date(System.currentTimeMillis() + EXPIRE_DATE);
-        Algorithm algorithm = Algorithm.HMAC256(secret);
+        Algorithm algorithm = Algorithm.HMAC256(phone);
         // 附带username信息
-        return JWT.create().withClaim("username", username).withExpiresAt(date).sign(algorithm);
+        return JWT.create().withClaim("phone", phone).withClaim("userId",userId).withExpiresAt(date).sign(algorithm);
 
     }
 
@@ -78,11 +78,11 @@ public class JwtUtil {
      */
     public static String getUserNameByToken(HttpServletRequest request) throws Exception {
         String accessToken = request.getHeader("X-Access-Token");
-        String username = getUsername(accessToken);
-        if (oConvertUtils.isEmpty(username)) {
+        String phone = getUserPhone(accessToken);
+        if (oConvertUtils.isEmpty(phone)) {
             throw new Exception("未获取到用户");
         }
-        return username;
+        return phone;
     }
 
     /**
@@ -90,24 +90,26 @@ public class JwtUtil {
      *
      * @return token中包含的用户名
      */
-    public static String getUsername(String token) {
+    public static String getUserPhone(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("username").asString();
+            return jwt.getClaim("phone").asString();
         } catch (JWTDecodeException e) {
             return null;
         }
     }
 
+
+
     /**
      * 获得token中的信息无需secret解密也能获得
      *
      * @return token中包含的用户名
      */
-    public static String getPassword(String token) {
+    public static Long getUserId(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("password").asString();
+            return jwt.getClaim("userId").asLong();
         } catch (JWTDecodeException e) {
             return null;
         }
@@ -128,13 +130,15 @@ public class JwtUtil {
             return  false;
         }
     }
-    public static void main(String[] args) {
-        String username ="zhangsan";
-        String password = "123";
-        String token = token(username,password);
-        System.out.println(token);
-        boolean b = verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXNzd29yZCI6IjEyMyIsImV4cCI6MTY0MTQ0MTE4NSwidXNlcm5hbWUiOiJ6aGFuZ3NhbiJ9.uFbr2rpueyauBSpP8H_zlw_BOZmtBLApqD2T-AX4kig");
-        System.out.println(b);
-    }
+
+//    public static void main(String[] args) {
+//        String username ="zhangsan";
+//        Long userId = Long.valueOf(123);
+//        String token = token(username,userId);
+//        System.out.println(token);
+//        boolean b = verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6InpoYW5nc2FuIiwiZXhwIjoxNjYzNjk0MTQzLCJ1c2VySWQiOjEyM30.5SHgjcTOiocOUYC8MHCoRYicLWTJv6SkovNWQ05li7M");
+//        System.out.println(b);
+//
+//    }
 
 }

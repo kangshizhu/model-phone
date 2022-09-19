@@ -1,9 +1,12 @@
 package modules.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -14,21 +17,23 @@ import java.util.Date;
 public class BaseEntity {
 
     /**创建人*/
+    @TableField(fill = FieldFill.INSERT)
     private Long createBy;
 
     /**修改人*/
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateBy;
 
     /**创建时间*/
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
 
 
     /**修改时间*/
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
 
 
 }

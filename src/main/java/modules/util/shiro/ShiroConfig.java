@@ -73,7 +73,29 @@ public class ShiroConfig {
 
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/users/queryUser", "anon"); //登录接口排除
-
+        filterChainDefinitionMap.put("/users/select", "anon"); //登录接口排除
+        filterChainDefinitionMap.put("/generic/**", "anon");//pdf预览需要文件
+        //接口文档排除
+        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/doc.html", "anon");
+        filterChainDefinitionMap.put("/**/*.js", "anon");
+        filterChainDefinitionMap.put("/**/*.css", "anon");
+        filterChainDefinitionMap.put("/**/*.html", "anon");
+        filterChainDefinitionMap.put("/**/*.svg", "anon");
+        filterChainDefinitionMap.put("/**/*.pdf", "anon");
+        filterChainDefinitionMap.put("/**/*.jpg", "anon");
+        filterChainDefinitionMap.put("/**/*.png", "anon");
+        filterChainDefinitionMap.put("/**/*.ico", "anon");
+        // update-begin--Author:sunjianlei Date:20190813 for：排除字体格式的后缀
+        filterChainDefinitionMap.put("/**/*.ttf", "anon");
+        filterChainDefinitionMap.put("/**/*.woff", "anon");
+        filterChainDefinitionMap.put("/**/*.woff2", "anon");
+        // update-begin--Author:sunjianlei Date:20190813 for：排除字体格式的后缀
+        filterChainDefinitionMap.put("/druid/**", "anon");
+        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+        filterChainDefinitionMap.put("/swagger**/**", "anon");
+        filterChainDefinitionMap.put("/webjars/**", "anon");
+        filterChainDefinitionMap.put("/v2/**", "anon");
         // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<String, Filter>(1);
         //如果cloudServer为空 则说明是单体 需要加载跨域配置
