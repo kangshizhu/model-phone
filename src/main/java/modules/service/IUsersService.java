@@ -19,6 +19,6 @@ public interface IUsersService extends IService<Users> {
     //微信登录
     Result weiXinLogin(WeiXinLoginDTO weiXinLoginDTO);
     //用户登录
-    Result<JSONObject> queryRuleUser(UsersDto usersDto);
+    Result<JSONObject> login(UsersDto usersDto);
 
 }

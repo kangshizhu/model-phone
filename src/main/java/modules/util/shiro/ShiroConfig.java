@@ -72,7 +72,7 @@ public class ShiroConfig {
         }
 
         // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/users/queryUser", "anon"); //登录接口排除
+        filterChainDefinitionMap.put("/users/login", "anon"); //登录接口排除
         filterChainDefinitionMap.put("/users/select", "anon"); //登录接口排除
         filterChainDefinitionMap.put("/generic/**", "anon");//pdf预览需要文件
         //接口文档排除

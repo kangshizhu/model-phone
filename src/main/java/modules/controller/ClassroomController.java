@@ -28,7 +28,7 @@ import java.util.List;
  * @author kangshizhu
  * @since 2022-09-15
  */
-@Api(tags = "用户接口")
+@Api(tags = "模板接口")
 @Log4j2
 @RestController
 @RequestMapping("/classroom")
@@ -38,7 +38,7 @@ public class ClassroomController {
     @Resource
     ClassroomMapper classroomMapper;
 
-    @ApiOperation(value = "获取用户", notes = "查询用户信息")
+    @ApiOperation(value = "模板接口获取用户", notes = "查询用户信息")
     @PostMapping(value = "/queryUser")
     @ResponseBody
     public Result queryRuleUser(@RequestBody @Valid ClassroomDto classroomDto) {
@@ -50,7 +50,7 @@ public class ClassroomController {
         return Result.OK(classroomList);
     }
 
-    @ApiOperation(value = "获取用户", notes = "查询用户信息")
+    @ApiOperation(value = "模板接口获取用户", notes = "查询用户信息")
     @PostMapping(value = "/select")
     @ResponseBody
     public Result select() {
@@ -62,19 +62,19 @@ public class ClassroomController {
         return Result.OK(classroomList);
     }
 
-    @ApiOperation(value = "获取用户", notes = "查询用户信息")
+
+    @ApiOperation(value = "模板接口修改用户", notes = "修改用户信息")
     @PostMapping(value = "/update")
     @ResponseBody
     public Result update() {
         Classroom classroom=new Classroom();
         classroom.setId(1);
-        classroom.setUsernames("asas");
         classroomMapper.updateById(classroom);
         return Result.OK("修改");
     }
 
 
-    @ApiOperation(value = "获取用户", notes = "根据id查询用户信息")
+    @ApiOperation(value = "模板接口获取用户", notes = "模板接口根据id查询用户信息")
     @PostMapping(value = "/selectById")
     @ResponseBody
     public Result selectById(@RequestBody @Valid ClassroomDto classroomDto) {

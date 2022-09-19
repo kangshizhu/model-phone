@@ -87,7 +87,6 @@ public class ShiroRealm extends AuthorizingRealm  {
 
         log.debug("===============Shiro身份认证开始============doGetAuthenticationInfo==========");
         String token = (String) auth.getCredentials();
-        System.out.println(token+"qqqqqqqqqqqqq");
         if (token == null) {
             log.info("————————身份认证失败——————————IP地址:  "+ oConvertUtils.getIpAddrByRequest(SpringContextUtils.getHttpServletRequest()));
             throw new AuthenticationException("token为空!");

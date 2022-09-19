@@ -2,6 +2,7 @@ package modules.mapper;
 
 import modules.entity.Users;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UsersMapper extends BaseMapper<Users> {
 
+    void add(@Param("users") Users users);
 }

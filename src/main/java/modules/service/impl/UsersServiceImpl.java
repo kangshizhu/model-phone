@@ -45,28 +45,41 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     private RedisUtil redisUtil;
     //用户登录后返回token和用户信息
     @Override
-    public Result<JSONObject> queryRuleUser(UsersDto usersDto) {
+    public Result<JSONObject> login(UsersDto usersDto) {
         QueryWrapper<Users> queryWrapper=new QueryWrapper<>();
         //String userpassword = PasswordUtil.encrypt("cloud", password,salt);
         queryWrapper.eq("phone",usersDto.getPhone());
         //查询用户是否存在
         Users userOne=usersMapper.selectOne(queryWrapper);
+        //返回前端参数
+        Users userReturn=new Users();
+        //手机第一次登陆就创建一个新用户
+        if(userOne==null){
+            Users userInsert=new Users();
+            userInsert.setPhone(usersDto.getPhone());
+            usersMapper.insert(userInsert);
+            BeanUtils.copyProperties(userInsert,userReturn);
+        }else{
+            BeanUtils.copyProperties(userOne,userReturn);
+        }
+
+        // 生成token
+        String token = JwtUtil.sign(userReturn.getPhone(), userReturn.getId());
+        //redis存取用户信息和token
         Result<JSONObject> result=new Result<JSONObject>();
         Long date = new Date(System.currentTimeMillis() + JwtUtil.EXPIRE_DATE).getTime();
-        // 生成token
-        System.out.println(userOne.getPhone()+ userOne.getId()+"fffffffffff");
-        String token = JwtUtil.sign(userOne.getPhone(), userOne.getId());
-        //redis存取用户信息和token
+        //存入redis参数 loginUser
         LoginUser loginUser=new LoginUser();
-        BeanUtils.copyProperties(userOne,loginUser);
+        BeanUtils.copyProperties(userReturn,loginUser);
         redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, loginUser);
         redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, date);
         JSONObject obj = new JSONObject();
         obj.put("token", token);
-        obj.put("userInfo", userOne);
+        obj.put("userInfo", userReturn);
         result.setResult(obj);
         return result;
     }
+
     /**
      * 微信免密码登录
      * @param weiXinLoginDTO

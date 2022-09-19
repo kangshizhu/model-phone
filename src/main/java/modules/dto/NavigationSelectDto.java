@@ -29,14 +29,10 @@ public class NavigationSelectDto extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键id")
-    private Long id;
 
-    @NotBlank(message = "导航栏名称不能为空")
     @ApiModelProperty(value = "导航栏名称",required = true)
     private String labelName;
 
-    @NotNull(message = "排序不能为空")
     @ApiModelProperty(value = "排序",required = true)
     private int sort;
 

@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import modules.util.phone.Phone;
 
 /**
  * <p>
@@ -38,10 +39,11 @@ public class Users extends BaseEntity {
     @ApiModelProperty(value = "密码")
     private String password;
 
+
     @ApiModelProperty(value = "电话号码")
     private String phone;
 
-    @ApiModelProperty(value = "用户类型(1:普通用户,2:达人,3:机构,4:品牌商家)")
+    @ApiModelProperty(value = "用户类型(0:后台管理员,1:普通用户,2:达人,3:机构,4:品牌商家)")
     private Integer type;
 
 

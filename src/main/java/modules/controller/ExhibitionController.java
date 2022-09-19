@@ -38,6 +38,7 @@ public class ExhibitionController {
     @Resource
     IExhibitionService iExhibitionService;
 
+
     @ApiOperation(value = "小程序作品添加", notes = "小程序作品添加")
     @PostMapping(value = "/add")
     @ResponseBody
@@ -67,8 +68,5 @@ public class ExhibitionController {
         List<ExhibitionnVo> exhibitionnVoList=iExhibitionService.selectAll();
         return Result.OK(exhibitionnVoList);
     }
-
-
-
 
 }

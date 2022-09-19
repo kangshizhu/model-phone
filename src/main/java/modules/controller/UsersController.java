@@ -50,7 +50,6 @@ public class UsersController {
     @RequestMapping(value = "/weiXinLogin", method = RequestMethod.POST)
     public Result weiXinLogin(@RequestBody @Valid WeiXinLoginDTO weiXinLoginDTO){
         return iUsersService.weiXinLogin(weiXinLoginDTO);
-
     }
 
 
@@ -58,7 +57,7 @@ public class UsersController {
     @PostMapping(value = "/login")
     @ResponseBody
     public Result login(@RequestBody @Valid UsersDto usersDto) {
-        Result<JSONObject> result=iUsersService.queryRuleUser(usersDto);
+        Result<JSONObject> result=iUsersService.login(usersDto);
         return Result.OK(result);
     }
 
