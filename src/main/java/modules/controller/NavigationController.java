@@ -36,15 +36,7 @@ public class NavigationController {
     @Resource
     NavigationMapper navigationMapper;
 
-    @ApiOperation(value = "导航栏添加", notes = "商户导航栏添加")
-    @PostMapping(value = "/add")
-    @ResponseBody
-    public Result add(@RequestBody @Valid NavigationDto nvigationDto) {
-        Navigation navigation=new Navigation();
-        BeanUtils.copyProperties(nvigationDto,navigation);
-        navigationMapper.insert(navigation);
-        return Result.OK("添加成功");
-    }
+
 
     @ApiOperation(value = "导航栏删除", notes = "商户导航栏删除根据id")
     @PostMapping(value = "/delele")

@@ -72,5 +72,12 @@ public class UsersController {
         return Result.OK(users);
     }
 
+    @ApiOperation(value = "test", notes = "test")
+    @PostMapping(value = "/test")
+    @ResponseBody
+    public Result test() {
+        return Result.OK("xxx");
+    }
+
 
 }
