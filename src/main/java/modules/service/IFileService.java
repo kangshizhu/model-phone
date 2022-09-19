@@ -21,5 +21,5 @@ import java.io.File;
 public interface IFileService  {
 
 
-    Result upload(File file);
+
 }

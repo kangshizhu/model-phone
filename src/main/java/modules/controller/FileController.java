@@ -11,6 +11,7 @@ import modules.entity.Users;
 import modules.service.IFileService;
 import modules.service.IUsersService;
 
+import modules.util.aliyunFile.AliyunOSSUtil;
 import modules.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,28 +42,27 @@ public class FileController {
 
     /**
      * 阿里云文件上传
-     * @param request
+     * @param files
      * @return
      */
-    @ApiOperation("阿里云文件上传")
+    @ApiOperation("阿里云单个文件上传")
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public Result upload(HttpServletRequest request) throws Exception {
-        MultipartHttpServletRequest params = ((MultipartHttpServletRequest) request);
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
-        if (StringUtils.isNullOrEmpty(files.get(0).getName())) {
-            return null;
-        }
-        System.out.println(files.get(0).getName()+"xxxxxxxxxxxx");
-        // 获取文件后缀
-        String prefix = files.get(0).getName().substring(files.get(0).getName().lastIndexOf("."));
+    public Result upload(MultipartFile files) throws Exception {
+
+        File file = null;
         try {
-            File file = File.createTempFile(files.get(0).getName(), prefix);
-            return iFileService.upload(file);
+            //MultipartFile 转file
+            String originalFilename = files.getOriginalFilename();
+            String[] filename = originalFilename.split("\\.");
+            file = File.createTempFile(filename[0], filename[1]);    //注意下面的 特别注意！！！
+            files.transferTo(file);
+            file.deleteOnExit();
+            //返回阿里云文件路径
+            String url=AliyunOSSUtil.OSSUploadFile(file);
+            return Result.OK(url);
         } catch (Exception e) {
             throw new Exception("文件转化失败");
         }
     }
-
-
 
 }

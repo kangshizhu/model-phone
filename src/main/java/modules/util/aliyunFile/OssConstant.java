@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import javax.annotation.PostConstruct;
+
 /**
  * @description:
  * @author:kangshizhu
@@ -14,8 +16,8 @@ import org.springframework.stereotype.Controller;
 
 @Component
 public class OssConstant implements InitializingBean {
-    @Autowired
-    OssConstant ossConstant;
+//    @Autowired
+//    OssConstant ossConstant;
 
     @Value("${aliyun.oss.file.endPoint}")
     private String oss_file_endpoint;
@@ -37,10 +39,16 @@ public class OssConstant implements InitializingBean {
     public static String OSS_ACCESS_KEY_SECRET_IM;
 
     @Override
+    @PostConstruct
     public void afterPropertiesSet() throws Exception {
+
         OSS_END_POINT_IM = oss_file_endpoint;
         OSS_BUCKET_IM = oss_file_bucketname;
         OSS_ACCESS_KEY_ID_IM = oss_file_keyid;
         OSS_ACCESS_KEY_SECRET_IM = oss_file_keyecrets;
+        System.out.println(OSS_END_POINT_IM+"xxxxxxxxxxx"+OSS_BUCKET_IM);
     }
+
+
+
 }
