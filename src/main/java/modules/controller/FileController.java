@@ -36,6 +36,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/file")
 public class FileController {
+
    @Resource
    IFileService iFileService;
 

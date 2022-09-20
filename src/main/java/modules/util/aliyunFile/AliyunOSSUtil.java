@@ -53,10 +53,10 @@ public class AliyunOSSUtil {
             //上传文件
             PutObjectResult result = ossClient.putObject(new PutObjectRequest(bucket, fileUrl, file));
             //设置权限 这里是私有权限读写
-            ossClient.setBucketAcl(bucket,CannedAccessControlList.Default);
+            //ossClient.setBucketAcl(bucket,CannedAccessControlList.Default);
             if(null != result){
                 logger.info("==========>OSS文件上传成功,OSS地址："+fileUrl);
-                return bucket+"/"+fileUrl;
+                return "https://"+bucket+"."+endpoint+"/"+fileUrl;
             }
         }catch (OSSException oe){
             logger.error(oe.getMessage());

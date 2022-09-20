@@ -41,6 +41,7 @@ public class UsersController {
     @Resource
     IUsersService iUsersService;
 
+
     /**
      * 微信免密码登录
      * @param weiXinLoginDTO
@@ -51,7 +52,6 @@ public class UsersController {
     public Result weiXinLogin(@RequestBody @Valid WeiXinLoginDTO weiXinLoginDTO){
         return iUsersService.weiXinLogin(weiXinLoginDTO);
     }
-
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @PostMapping(value = "/login")
@@ -72,12 +72,7 @@ public class UsersController {
         return Result.OK(users);
     }
 
-    @ApiOperation(value = "test", notes = "test")
-    @PostMapping(value = "/test")
-    @ResponseBody
-    public Result test() {
-        return Result.OK("xxx");
-    }
+
 
 
 }

@@ -46,7 +46,6 @@ public class OssConstant implements InitializingBean {
         OSS_BUCKET_IM = oss_file_bucketname;
         OSS_ACCESS_KEY_ID_IM = oss_file_keyid;
         OSS_ACCESS_KEY_SECRET_IM = oss_file_keyecrets;
-        System.out.println(OSS_END_POINT_IM+"xxxxxxxxxxx"+OSS_BUCKET_IM);
     }
 
 

@@ -55,4 +55,5 @@ import java.util.Date;
         this.setFieldValByName("updateTime",LocalDateTime.now(),metaObject);
         this.setFieldValByName("updateBy",userId,metaObject);
     }
+
 }

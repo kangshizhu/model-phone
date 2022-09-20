@@ -131,14 +131,13 @@ public class JwtUtil {
         }
     }
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        String username ="zhangsan";
 //        Long userId = Long.valueOf(123);
 //        String token = token(username,userId);
 //        System.out.println(token);
 //        boolean b = verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6InpoYW5nc2FuIiwiZXhwIjoxNjYzNjk0MTQzLCJ1c2VySWQiOjEyM30.5SHgjcTOiocOUYC8MHCoRYicLWTJv6SkovNWQ05li7M");
 //        System.out.println(b);
-//
-//    }
+    }
 
 }
