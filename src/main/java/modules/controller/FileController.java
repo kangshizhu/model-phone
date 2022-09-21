@@ -37,8 +37,7 @@ import java.util.List;
 @RequestMapping("/file")
 public class FileController {
 
-   @Resource
-   IFileService iFileService;
+
 
 
     /**
@@ -65,5 +64,6 @@ public class FileController {
             throw new Exception("文件转化失败");
         }
     }
+
 
 }

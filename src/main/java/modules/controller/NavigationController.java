@@ -33,10 +33,9 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/navigation")
 public class NavigationController {
+
     @Resource
     NavigationMapper navigationMapper;
-
-
 
     @ApiOperation(value = "导航栏删除", notes = "商户导航栏删除根据id")
     @PostMapping(value = "/delele")

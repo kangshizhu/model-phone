@@ -34,10 +34,8 @@ public class ExhibitionController {
 
     @Resource
     ExhibitionMapper exhibitionMapper;
-
     @Resource
     IExhibitionService iExhibitionService;
-
 
     @ApiOperation(value = "小程序作品添加", notes = "小程序作品添加")
     @PostMapping(value = "/add")
@@ -60,13 +58,20 @@ public class ExhibitionController {
         return Result.OK("删除成功");
     }
 
-
-    @ApiOperation(value = "小程序作品查询", notes = "小程序作品查询关联users表")
+    @ApiOperation(value = "查询所有小程序作品", notes = "查询所有小程序作品查询关联users表")
     @PostMapping(value = "/select")
     @ResponseBody
     public Result select() {
         List<ExhibitionnVo> exhibitionnVoList=iExhibitionService.selectAll();
         return Result.OK(exhibitionnVoList);
+    }
+
+    @ApiOperation(value = "查询单个小程序作用", notes = "查询单个小程序作用 关联一级评论表main_comment和二级评论表minor_comment")
+    @PostMapping(value = "/selectById")
+    @ResponseBody
+    public Result selectById(@RequestBody IdDto idDto) {
+
+        return Result.OK("null");
     }
 
 }
