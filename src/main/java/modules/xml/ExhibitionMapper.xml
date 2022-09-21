@@ -6,4 +6,39 @@
         select  * from  exhibition  left JOIN users  on exhibition.users_id=users.id
     </select>
 
+    <!--单个作品和所有评论查询-->
+    <resultMap id="ExhibitionReturnVolResult" type="modules.vo.ExhibitionReturnVo" >
+        <result column="id" property="id" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <collection property="mainCommentReturnVoList" select="getMainCommentReturnVoist" ofType="modules.vo.MainCommentReturnVo" column="id" >
+
+        </collection>
+    </resultMap>
+
+    <resultMap id="MainCommentReturnVolResult" type="modules.vo.MainCommentReturnVo" >
+        <result column="id" property="id" />
+        <collection property="minorCommentReturnVoList" select="getMinorCommentReturnList" ofType="modules.vo.MinorCommentReturnVo" column="id" >
+
+        </collection>
+    </resultMap>
+
+    <!--单个作品和所有评论查询-->
+    <select id="selectByIdReturn" resultType="modules.vo.ExhibitionReturnVo" resultMap="ExhibitionReturnVolResult">
+          select * from  exhibition where id=#{id}
+    </select>
+
+    <!--单个作品和所有评论查询-->
+    <select id="getMainCommentReturnVoist"  parameterType="Object"  resultType="modules.vo.MainCommentReturnVo"  resultMap="MainCommentReturnVolResult">
+        select * from  main_comment where exhibition_id=#{id}
+    </select>
+
+
+    <!--单个作品和所有评论查询-->
+    <select id="getMinorCommentReturnList"  parameterType="Object"  resultType="modules.vo.MinorCommentReturnVo" >
+        select * from  minor_comment where main_comment_id=#{id}
+    </select>
+
 </mapper>

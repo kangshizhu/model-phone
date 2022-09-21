@@ -34,6 +34,7 @@ import javax.validation.Valid;
 @RequestMapping("/navigation")
 public class NavigationController {
 
+
     @Resource
     NavigationMapper navigationMapper;
 
@@ -45,6 +46,7 @@ public class NavigationController {
         return Result.OK("删除成功");
     }
 
+
     @ApiOperation(value = "导航栏修改", notes = "商户导航栏修改根据id")
     @PostMapping(value = "/update")
     @ResponseBody
@@ -52,6 +54,7 @@ public class NavigationController {
         navigationMapper.updateById(navigation);
         return Result.OK("删除成功");
     }
+
 
     @ApiOperation(value = "导航栏查询", notes = "商户导导航栏查询")
     @PostMapping(value = "/select")
@@ -62,6 +65,7 @@ public class NavigationController {
         IPage<Navigation> navigationList=navigationMapper.selectPage(page,QueryWrapper);
         return Result.OK(navigationList);
     }
+
 
 
 }

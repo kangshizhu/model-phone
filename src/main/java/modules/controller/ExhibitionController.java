@@ -5,11 +5,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import modules.dto.ExhibitionDto;
 import modules.dto.IdDto;
-import modules.dto.NavigationDto;
 import modules.entity.Exhibition;
-import modules.entity.Navigation;
 import modules.mapper.ExhibitionMapper;
 import modules.service.IExhibitionService;
+import modules.vo.ExhibitionReturnVo;
 import modules.vo.ExhibitionnVo;
 import modules.vo.Result;
 import org.springframework.beans.BeanUtils;
@@ -70,8 +69,9 @@ public class ExhibitionController {
     @PostMapping(value = "/selectById")
     @ResponseBody
     public Result selectById(@RequestBody IdDto idDto) {
-
-        return Result.OK("null");
+        List<ExhibitionReturnVo> list=iExhibitionService.selectById(idDto.getId());
+        return Result.OK(list);
     }
+
 
 }

@@ -4,6 +4,7 @@ import modules.entity.Exhibition;
 import modules.mapper.ExhibitionMapper;
 import modules.service.IExhibitionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import modules.vo.ExhibitionReturnVo;
 import modules.vo.ExhibitionnVo;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,13 @@ public class ExhibitionServiceImpl extends ServiceImpl<ExhibitionMapper, Exhibit
     public List<ExhibitionnVo> selectAll() {
         List<ExhibitionnVo> exhibitionnVoList=exhibitionMapper.selectAll();
         return exhibitionnVoList;
+    }
+
+    //查询单个小程序作用
+    @Override
+    public List<ExhibitionReturnVo> selectById(Long id) {
+        List<ExhibitionReturnVo> list=exhibitionMapper.selectByIdReturn(id);
+        return list;
     }
 
 

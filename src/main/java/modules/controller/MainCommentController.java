@@ -24,7 +24,6 @@ import javax.validation.Valid;
 @RequestMapping("/mainComment")
 public class MainCommentController {
 
-
     @Resource
     IMainCommentService iMainCommentService;
 
@@ -38,5 +37,6 @@ public class MainCommentController {
         iMainCommentService.save(mainComment);
         return Result.OK("添加成功");
     }
+
 
 }

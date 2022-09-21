@@ -26,6 +26,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/minorComment")
 public class MinorCommentController {
+
     @Resource
     IMinorCommentService iMinorCommentService;
 
@@ -39,4 +40,6 @@ public class MinorCommentController {
         iMinorCommentService.save(minorComment);
         return Result.OK("添加成功");
     }
+
+
 }

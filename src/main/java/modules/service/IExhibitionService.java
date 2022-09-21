@@ -2,6 +2,7 @@ package modules.service;
 
 import modules.entity.Exhibition;
 import com.baomidou.mybatisplus.extension.service.IService;
+import modules.vo.ExhibitionReturnVo;
 import modules.vo.ExhibitionnVo;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface IExhibitionService extends IService<Exhibition> {
 
     //小程序作品查询
     List<ExhibitionnVo> selectAll();
+
+    //查询单个小程序作用
+    List<ExhibitionReturnVo> selectById(Long id);
 }

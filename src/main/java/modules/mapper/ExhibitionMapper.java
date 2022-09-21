@@ -2,7 +2,9 @@ package modules.mapper;
 
 import modules.entity.Exhibition;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import modules.vo.ExhibitionReturnVo;
 import modules.vo.ExhibitionnVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +19,6 @@ import java.util.List;
 public interface ExhibitionMapper extends BaseMapper<Exhibition> {
 
     List<ExhibitionnVo> selectAll();
+
+    List<ExhibitionReturnVo> selectByIdReturn(@Param("id") Long id);
 }
