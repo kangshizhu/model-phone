@@ -40,7 +40,11 @@ public class MinorCommentDto extends BaseEntity {
 
     @NotNull(message = "评论人不能为空")
     @ApiModelProperty(value = "评论人id",required = true)
-    private Long userId;
+    private Long usersId;
+
+    @NotNull(message = "关联exhibition表小程序作品id不能为空")
+    @ApiModelProperty(value = "关联exhibition表小程序作品id",required = true)
+    private Long exhibitionId;
 
 
 }

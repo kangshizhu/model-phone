@@ -2,8 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="modules.mapper.ExhibitionMapper">
 
-    <select id="selectAll" resultType="modules.vo.ExhibitionnVo">
-        select  * from  exhibition  left JOIN users  on exhibition.users_id=users.id
+
+    <!-- 添加点赞次数-->
+    <update id="thumbsById">
+        update exhibition set thumbs=thumbs+1 where id=#{id}
+    </update>
+    <!-- 减少点赞次数-->
+    <update id="thumbsByIdUpdate">
+        update exhibition set thumbs=thumbs-1 where id=#{id}
+    </update>
+    <!-- 添加收藏次数-->
+    <update id="followsById">
+        update exhibition set follows=follows+1 where id=#{id}
+    </update>
+    <!-- 减少收藏次数-->
+    <update id="followsByIdUpdate">
+        update exhibition set follows=follows-1 where id=#{id}
+    </update>
+
+    <!-- 添加作品评论数量-->
+    <update id="updateCommentNumbersById">
+        update exhibition set comment_numbers=comment_numbers+1 where id=#{id}
+    </update>
+
+    <!--查询所有的作品并标记点赞的作品type为1-->
+    <select id="selectAll" resultType="modules.vo.ExhibitionnVo" >
+
+        select  (SELECT count(id) FROM users_exhibiton_thumbs where users_id=#{userId} and exhibiton_id=exhibition.id) as type,
+                exhibition.*,users.username,
+                users.head_portrait
+        from  exhibition  left JOIN users  on exhibition.users_id=users.id
     </select>
 
     <!--单个作品和所有评论查询-->

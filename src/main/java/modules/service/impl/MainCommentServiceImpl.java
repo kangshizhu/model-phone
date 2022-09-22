@@ -1,5 +1,7 @@
 package modules.service.impl;
 
+import modules.dto.CommentAddDto;
+import modules.dto.IdDto;
 import modules.dto.MainCommentDto;
 import modules.entity.MainComment;
 import modules.mapper.MainCommentMapper;
@@ -23,4 +25,10 @@ public class MainCommentServiceImpl extends ServiceImpl<MainCommentMapper, MainC
     MainCommentMapper mainCommentMapper;
 
 
+
+    //一级评论点赞接口传main_comment的id
+    @Override
+    public void addThumbs(CommentAddDto commentAddDto) {
+
+    }
 }

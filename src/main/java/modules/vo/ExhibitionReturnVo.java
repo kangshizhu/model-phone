@@ -56,4 +56,6 @@ public class ExhibitionReturnVo extends BaseEntity {
     @ApiModelProperty(value = "一级评论vo")
     private List<MainCommentReturnVo> mainCommentReturnVoList;
 
+    @ApiModelProperty(value = "所有评论数量")
+    private Integer commentNumbers;
 }

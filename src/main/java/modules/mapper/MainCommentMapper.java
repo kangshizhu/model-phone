@@ -1,7 +1,9 @@
 package modules.mapper;
 
+import modules.dto.IdDto;
 import modules.entity.MainComment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>

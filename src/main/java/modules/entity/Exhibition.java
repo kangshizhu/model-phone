@@ -45,11 +45,16 @@ public class Exhibition extends BaseEntity {
     @ApiModelProperty(value = "作品路径list")
     private String exhibitionUrl;
 
-    @ApiModelProperty(value = "关注数量")
+    @ApiModelProperty(value = "收藏数量")
     private Integer follows;
 
     @ApiModelProperty(value = "介绍")
     private String introduce;
 
+    @ApiModelProperty(value = "评论数量")
+    private Integer commentNumbers;
+
+    @ApiModelProperty(value = "审核是否通过(0:未通过，1:通过)")
+    private Integer examineType;
 
 }

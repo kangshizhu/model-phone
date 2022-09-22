@@ -52,6 +52,11 @@ public class ExhibitionnVo extends BaseEntity {
     @ApiModelProperty(value = "用户头像")
     private Long headPortrait;
 
+    @ApiModelProperty(value = "是否点赞过对应前端颜色显示")
+    private Integer type ;
+
+
+
 
 
 

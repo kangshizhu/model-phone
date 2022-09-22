@@ -5,6 +5,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import modules.dto.ExhibitionDto;
 import modules.dto.IdDto;
+import modules.dto.UserIdAddDto;
+import modules.dto.UserIdDto;
 import modules.entity.Exhibition;
 import modules.mapper.ExhibitionMapper;
 import modules.service.IExhibitionService;
@@ -45,6 +47,8 @@ public class ExhibitionController {
         BeanUtils.copyProperties(exhibitionDto,exhibition);
         exhibition.setFollows(0);
         exhibition.setThumbs(0);
+        exhibition.setCommentNumbers(0);
+        exhibition.setExamineType(0);
         exhibitionMapper.insert(exhibition);
         return Result.OK("添加成功");
     }
@@ -60,12 +64,12 @@ public class ExhibitionController {
     @ApiOperation(value = "查询所有小程序作品", notes = "查询所有小程序作品查询关联users表")
     @PostMapping(value = "/select")
     @ResponseBody
-    public Result select() {
-        List<ExhibitionnVo> exhibitionnVoList=iExhibitionService.selectAll();
+    public Result select(@RequestBody UserIdAddDto userIdAddDto) {
+        List<ExhibitionnVo> exhibitionnVoList=iExhibitionService.selectAll(userIdAddDto.getUsersId());
         return Result.OK(exhibitionnVoList);
     }
 
-    @ApiOperation(value = "查询单个小程序作用", notes = "查询单个小程序作用 关联一级评论表main_comment和二级评论表minor_comment")
+    @ApiOperation(value = "查询单个小程序所有传exhibition的id", notes = "查询单个小程序所有 关联一级评论表main_comment和二级评论表minor_comment")
     @PostMapping(value = "/selectById")
     @ResponseBody
     public Result selectById(@RequestBody IdDto idDto) {
@@ -73,5 +77,20 @@ public class ExhibitionController {
         return Result.OK(list);
     }
 
+    @ApiOperation(value = "小程序作品点赞取消点赞", notes = "小程序作品点赞取消点赞根据作品id ")
+    @PostMapping(value = "/thumbsById")
+    @ResponseBody
+    public Result thumbsById(@RequestBody UserIdDto userIdDto) {
+        Integer thumbs=iExhibitionService.thumbsById(userIdDto);
+        return Result.OK(thumbs);
+    }
+
+    @ApiOperation(value = "小程序作品收藏取消收藏", notes = "小程序作品收藏取消收藏根据作品id ")
+    @PostMapping(value = "/followsById")
+    @ResponseBody
+    public Result followsById(@RequestBody UserIdDto userIdDto) {
+        Integer follows=iExhibitionService.followsById(userIdDto);
+        return Result.OK(follows);
+    }
 
 }

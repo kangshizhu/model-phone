@@ -10,21 +10,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * <p>
- * 第二级评论表
+ * 
  * </p>
  *
  * @author kangshizhu
- * @since 2022-09-20
+ * @since 2022-09-22
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value="MinorComment对象", description="第二级评论表")
-public class MinorComment extends BaseEntity {
+@ApiModel(value="UsersExhibitionFollows对象", description="作品收藏与人关联表")
+public class UsersExhibitionFollows extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,19 +30,15 @@ public class MinorComment extends BaseEntity {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "关联一级评论表main_comment")
-    private Long mainCommentId;
+    @ApiModelProperty(value = "账号")
+    private String username;
 
-    @ApiModelProperty(value = "评论")
-    private String comment;
 
-    @ApiModelProperty(value = "点赞数量")
-    private Integer thumbs;
-
-    @ApiModelProperty(value = "评论人id")
+    @ApiModelProperty(value = "点赞人id关联users的id")
     private Long usersId;
 
-    @NotNull(message = "关联exhibition表小程序作品id不能为空")
-    @ApiModelProperty(value = "关联exhibition表小程序作品id",required = true)
-    private Long exhibitionId;
+    @ApiModelProperty(value = "作品id关联exhibition的id")
+    private Long exhibitonId;
+
+
 }
