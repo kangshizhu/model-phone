@@ -54,7 +54,7 @@ public class ExhibitionServiceImpl extends ServiceImpl<ExhibitionMapper, Exhibit
     public Integer  thumbsById(UserIdDto userIdDto) {
         //查询是否点赞过
         QueryWrapper<UsersExhibitonThumbs> usersExhibitonThumbsQueryWrapper=new QueryWrapper<>();
-        usersExhibitonThumbsQueryWrapper.eq("users_id",userIdDto.getUserId()).eq("exhibiton_id",userIdDto.getExhibitionId());
+        usersExhibitonThumbsQueryWrapper.eq("users_id",userIdDto.getUsersId()).eq("exhibiton_id",userIdDto.getExhibitionId());
         UsersExhibitonThumbs usersExhibitonThumbs=usersExhibitonThumbsMapper.selectOne(usersExhibitonThumbsQueryWrapper);
 
         //获取多少点赞次数并返回
@@ -68,8 +68,9 @@ public class ExhibitionServiceImpl extends ServiceImpl<ExhibitionMapper, Exhibit
             exhibitionMapper.thumbsById(userIdDto.getExhibitionId());
             //添加关联数据
             UsersExhibitonThumbs usersExhibitonThumbAdd=new UsersExhibitonThumbs();
-            usersExhibitonThumbAdd.setUsersId(userIdDto.getUserId());
+            usersExhibitonThumbAdd.setUsersId(userIdDto.getUsersId());
             usersExhibitonThumbAdd.setExhibitonId(userIdDto.getExhibitionId());
+            usersExhibitonThumbAdd.setExhibitionUsersId(userIdDto.getExhibitionId());
             usersExhibitonThumbsMapper.insert(usersExhibitonThumbAdd);
             return  thumbs+1;
         }else{
@@ -87,7 +88,7 @@ public class ExhibitionServiceImpl extends ServiceImpl<ExhibitionMapper, Exhibit
     public Integer followsById(UserIdDto userIdDto) {
         //查询是否点收藏
         QueryWrapper<UsersExhibitionFollows> usersUsersExhibitionFollowsWrapper=new QueryWrapper<>();
-        usersUsersExhibitionFollowsWrapper.eq("users_id",userIdDto.getUserId()).eq("exhibiton_id",userIdDto.getExhibitionId());
+        usersUsersExhibitionFollowsWrapper.eq("users_id",userIdDto.getUsersId()).eq("exhibiton_id",userIdDto.getExhibitionId());
         UsersExhibitionFollows usersExhibitionFollows=usersExhibitionFollowsMapper.selectOne(usersUsersExhibitionFollowsWrapper);
 
         //获取多少收藏次数并返回
@@ -101,8 +102,9 @@ public class ExhibitionServiceImpl extends ServiceImpl<ExhibitionMapper, Exhibit
             exhibitionMapper.followsById(userIdDto.getExhibitionId());
             //添加收藏数据
             UsersExhibitionFollows usersExhibitionFollowsAdd=new UsersExhibitionFollows();
-            usersExhibitionFollowsAdd.setUsersId(userIdDto.getUserId());
+            usersExhibitionFollowsAdd.setUsersId(userIdDto.getUsersId());
             usersExhibitionFollowsAdd.setExhibitonId(userIdDto.getExhibitionId());
+            usersExhibitionFollowsAdd.setExhibitionUsersId(userIdDto.getExhibitionId());
             usersExhibitionFollowsMapper.insert(usersExhibitionFollowsAdd);
             return  follows+1;
         }else{

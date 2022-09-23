@@ -41,5 +41,8 @@ public class UsersExhibitonThumbs extends BaseEntity {
     @ApiModelProperty(value = "作品id关联exhibition的id")
     private Long exhibitonId;
 
+    @ApiModelProperty(value = "作品创作人关联exhibition的users_id")
+    private Long exhibitionUsersId;
+
 
 }

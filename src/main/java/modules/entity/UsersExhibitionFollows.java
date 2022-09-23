@@ -40,5 +40,8 @@ public class UsersExhibitionFollows extends BaseEntity {
     @ApiModelProperty(value = "作品id关联exhibition的id")
     private Long exhibitonId;
 
+    @ApiModelProperty(value = "作品id关联exhibition的id")
+    private Long exhibitionUsersId;
+
 
 }

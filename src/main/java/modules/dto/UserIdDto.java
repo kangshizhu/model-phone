@@ -19,5 +19,9 @@ public class UserIdDto {
 
     @NotNull(message = "userId不能为null")
     @ApiModelProperty(value = "userId",required = true)
-    private Long userId;
+    private Long usersId;
+
+    @NotNull(message = "exhibitionIdUserId作品创建人不能为null")
+    @ApiModelProperty(value = "exhibitionIdUserId作品创建人",required = true)
+    private Long exhibitionIdUserId;
 }

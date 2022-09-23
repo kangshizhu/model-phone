@@ -53,7 +53,7 @@ public class MainCommentController {
     @ApiOperation(value = "一级评论点赞接口传main_comment的id", notes = "一级评论点赞接口 传main_comment的id 同时根据id添加点赞数量")
     @PostMapping(value = "/addThumbs")
     @ResponseBody
-    public Result addThumbs(@RequestBody CommentAddDto commentAddDto) {
+    public Result addThumbs(@RequestBody @Valid CommentAddDto commentAddDto) {
         iMainCommentService.addThumbs(commentAddDto);
         return Result.OK("添加成功");
     }
