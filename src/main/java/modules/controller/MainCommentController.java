@@ -11,6 +11,7 @@ import modules.entity.MainComment;
 import modules.mapper.ExhibitionMapper;
 import modules.mapper.MainCommentMapper;
 import modules.service.IMainCommentService;
+import modules.vo.NumberTypeVo;
 import modules.vo.Result;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.BeanUtils;
@@ -36,7 +37,6 @@ public class MainCommentController {
     @Resource
     ExhibitionMapper exhibitionMapper;
 
-
     @ApiOperation(value = "一级评论添加接口 ", notes = "一级评论添加接口 同时根据exhibitionId添加作品评论数量")
     @PostMapping(value = "/add")
     @ResponseBody
@@ -54,8 +54,8 @@ public class MainCommentController {
     @PostMapping(value = "/addThumbs")
     @ResponseBody
     public Result addThumbs(@RequestBody @Valid CommentAddDto commentAddDto) {
-        iMainCommentService.addThumbs(commentAddDto);
-        return Result.OK("添加成功");
+        NumberTypeVo numberTypeVo=iMainCommentService.addThumbs(commentAddDto);
+        return Result.OK(numberTypeVo);
     }
 
 

@@ -2,5 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="modules.mapper.MainCommentMapper">
 
+   <!--添加一级评论次数-->
+    <insert id="addThumbs">
+        update main_comment set thumbs=thumbs+1 where id=#{mainCommentId}
+    </insert>
+
+    <!--减少一级评论次数-->
+    <update id="updateThumbs">
+        update main_comment set thumbs=thumbs-1 where id=#{mainCommentId}
+    </update>
 
 </mapper>

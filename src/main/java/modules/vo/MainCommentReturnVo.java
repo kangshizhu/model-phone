@@ -43,4 +43,7 @@ public class MainCommentReturnVo {
 
     @ApiModelProperty(value = "二级评论Vo")
     private List<MinorCommentReturnVo> minorCommentReturnVoList;
+
+    @ApiModelProperty(value = "是否自己0:没有点赞,1:点赞了")
+    private Integer type;
 }

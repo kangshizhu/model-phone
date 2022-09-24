@@ -14,5 +14,8 @@ import org.apache.ibatis.annotations.Param;
  * @since 2022-09-20
  */
 public interface MainCommentMapper extends BaseMapper<MainComment> {
-
+    //添加一级评论次数
+    void addThumbs(@Param("mainCommentId") Long mainCommentId);
+    //减少一级评论次数
+    void updateThumbs(Long mainCommentId);
 }

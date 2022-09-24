@@ -3,12 +3,15 @@ package modules.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
+import modules.dto.CommentAddDto;
 import modules.dto.IdDto;
 import modules.dto.MinorCommentDto;
+import modules.dto.MinorCommentThumbsDto;
 import modules.entity.MinorComment;
 import modules.mapper.ExhibitionMapper;
 import modules.mapper.NavigationMapper;
 import modules.service.IMinorCommentService;
+import modules.vo.NumberTypeVo;
 import modules.vo.Result;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +36,7 @@ public class MinorCommentController {
     @Resource
     ExhibitionMapper exhibitionMapper;
 
+
     @ApiOperation(value = "二级评论添加接口", notes = "二级评论添加接口")
     @PostMapping(value = "/add")
     @ResponseBody
@@ -46,5 +50,11 @@ public class MinorCommentController {
         return Result.OK("添加成功");
     }
 
-
+    @ApiOperation(value = "二级点赞接口传main_comment的id", notes = "一级评论点赞接口 传main_comment的id 同时根据id添加点赞数量")
+    @PostMapping(value = "/addThumbs")
+    @ResponseBody
+    public Result addThumbs(@RequestBody @Valid MinorCommentThumbsDto minorCommentThumbsDto) {
+        NumberTypeVo numberTypeVo=iMinorCommentService.addThumbs(minorCommentThumbsDto);
+        return Result.OK(numberTypeVo);
+    }
 }

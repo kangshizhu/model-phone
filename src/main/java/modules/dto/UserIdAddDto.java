@@ -13,9 +13,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserIdAddDto {
 
-    @NotNull(message = "作品id不能为null")
-    @ApiModelProperty(value = "作品id",required = true)
-    private Long id;
+
 
     @NotNull(message = "usersId不能为null")
     @ApiModelProperty(value = "usersId",required = true)

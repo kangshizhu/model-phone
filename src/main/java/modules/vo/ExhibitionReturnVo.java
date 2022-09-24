@@ -58,4 +58,10 @@ public class ExhibitionReturnVo extends BaseEntity {
 
     @ApiModelProperty(value = "所有评论数量")
     private Integer commentNumbers;
+
+    @ApiModelProperty(value = "是否自己0:没有点赞,1:点赞了")
+    private Integer type;
+
+    @ApiModelProperty(value = "传进来判断是否是用户点赞过了的id")
+    private Long nowid;
 }

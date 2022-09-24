@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="modules.mapper.MinorCommentMapper">
+    <!--添加二级评论次数-->
+    <update id="addThumbs">
+      update  minor_comment set thumbs=thumbs+1 where id=#{minorCommentId}
+    </update>
 
+    <!-- 减少二级评论次数-->
+    <update id="updateThumbs">
+        update  minor_comment set thumbs=thumbs-1 where id=#{minorCommentId}
+    </update>
 </mapper>

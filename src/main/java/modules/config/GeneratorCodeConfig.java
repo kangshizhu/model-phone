@@ -120,7 +120,7 @@ public class GeneratorCodeConfig {
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         //scanner("表名，多个英文逗号分割").split(",")
-        strategy.setInclude("users_exhibition_follows");
+        strategy.setInclude("minor_comment_thumbs");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

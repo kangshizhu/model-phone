@@ -52,7 +52,6 @@ public class WeiXinPayController {
     @ResponseBody
     public Result ServiceCreateNative(@RequestBody @Valid ServiceWeiXinPayDTO serviceWeiXinPayDTO,
                                       HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("11111111");
         try {
             //生成唯一id 随机生成商户单号
             String id= UUID.randomUUID().toString();

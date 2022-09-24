@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
  * @create:2022/9/22-10:05
  **/
 @Data
-public class CommentAddDto {
+public class MinorCommentThumbsDto {
 
-    @NotNull(message = "一级评论id不能为null")
+    @NotNull(message = "二级评论id不能为null")
     @ApiModelProperty(value = "一级评论id",required = true)
-    private Long mainCommentId;
+    private Long minorCommentId;
 
     @NotNull(message = "usersId不能为null")
     @ApiModelProperty(value = "usersId",required = true)

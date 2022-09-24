@@ -40,4 +40,10 @@ public class MinorCommentReturnVo extends BaseEntity {
 
     @ApiModelProperty(value = "评论人id")
     private Long userId;
+
+    @ApiModelProperty(value = "是否自己0:没有点赞,1:点赞了")
+    private Integer type;
+
+    @ApiModelProperty(value = "关联exhibition表小程序作品id")
+    private Long exhibitionId;
 }

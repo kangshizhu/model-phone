@@ -5,6 +5,7 @@ import modules.dto.IdDto;
 import modules.dto.MainCommentDto;
 import modules.entity.MainComment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import modules.vo.NumberTypeVo;
 
 /**
  * <p>
@@ -15,7 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-09-20
  */
 public interface IMainCommentService extends IService<MainComment> {
-    void addThumbs(CommentAddDto commentAddDto);
+    NumberTypeVo addThumbs(CommentAddDto commentAddDto);
     //一级评论点赞接口传main_comment的id
     
 }

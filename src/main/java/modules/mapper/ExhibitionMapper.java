@@ -17,10 +17,10 @@ import java.util.List;
  * @since 2022-09-17
  */
 public interface ExhibitionMapper extends BaseMapper<Exhibition> {
-
-    List<ExhibitionnVo> selectAll(@Param("userId")Long userId);
-    //查询单个小程序所有
-    List<ExhibitionReturnVo> selectByIdReturn(@Param("id") Long id);
+    //查询所有作品
+    List<ExhibitionnVo> selectAll(@Param("usersId")Long usersId);
+    //查询单个作品小程序所有
+    ExhibitionReturnVo selectByIdReturn(@Param("selectExhibitionId") Long selectExhibitionId,@Param("selectUsersId")Long selectUsersId,@Param("usersId")Long usersId);
     //添加点赞次数
     void thumbsById(@Param("id") Long id);
     //减少点赞次数

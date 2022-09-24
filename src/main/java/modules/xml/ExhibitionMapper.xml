@@ -28,19 +28,19 @@
     <!--查询所有的作品并标记点赞的作品type为1-->
     <select id="selectAll" resultType="modules.vo.ExhibitionnVo" >
 
-        select  (SELECT count(id) FROM users_exhibiton_thumbs where users_id=#{userId} and exhibiton_id=exhibition.id) as type,
+        select  (SELECT count(id) FROM users_exhibiton_thumbs where users_id=#{usersId} and exhibiton_id=exhibition.id) as type,
                 exhibition.*,users.username,
                 users.head_portrait
         from  exhibition  left JOIN users  on exhibition.users_id=users.id
     </select>
 
+
+
+
     <!--单个作品和所有评论查询-->
     <resultMap id="ExhibitionReturnVolResult" type="modules.vo.ExhibitionReturnVo" >
         <result column="id" property="id" />
-        <result column="create_by" property="createBy" />
-        <result column="create_time" property="createTime" />
-        <result column="update_by" property="updateBy" />
-        <result column="update_time" property="updateTime" />
+        <result column="nowid" property="nowid" />
         <collection property="mainCommentReturnVoList" select="getMainCommentReturnVoist" ofType="modules.vo.MainCommentReturnVo" column="id" >
 
         </collection>
@@ -55,18 +55,18 @@
 
     <!--单个作品和所有评论查询-->
     <select id="selectByIdReturn" resultType="modules.vo.ExhibitionReturnVo" resultMap="ExhibitionReturnVolResult">
-          select * from  exhibition where id=#{id}
+          select #{selectUsersId} as nowid,(select count(id) from  users_exhibiton_thumbs where users_id=#{selectUsersId} and exhibiton_id=exhibition.id )as type,exhibition.* from  exhibition where id=#{selectExhibitionId}
     </select>
 
     <!--单个作品和所有评论查询-->
     <select id="getMainCommentReturnVoist"  parameterType="Object"  resultType="modules.vo.MainCommentReturnVo"  resultMap="MainCommentReturnVolResult">
-        select * from  main_comment where exhibition_id=#{id}
-    </select>
+        select * from  main_comment where exhibition_id=#{nowid}
+     </select>
 
 
     <!--单个作品和所有评论查询-->
     <select id="getMinorCommentReturnList"  parameterType="Object"  resultType="modules.vo.MinorCommentReturnVo" >
-        select * from  minor_comment where main_comment_id=#{id}
+        select * from  minor_comment where main_comment_id=#{selectUsersId}
     </select>
 
 </mapper>
